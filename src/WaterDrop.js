@@ -9,8 +9,9 @@ export default function WaterDrop(props) {
   //   );
   // }
   return (
-    <div style={{ transform: `translateY(-${props.height}rem)` }}>
-      WaterDrop
-    </div>
+    <div
+      style={{ transform: `translateY(-${props.height}rem)` }}
+      className="dot"
+    ></div>
   );
 }

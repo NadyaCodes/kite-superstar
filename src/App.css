@@ -18,6 +18,14 @@
   }
 }
 
+.dot {
+  width: 10px;
+  height: 10px;
+  margin: 20px;
+  border-radius: 50%;
+  background-color: blue;
+}
+
 /* .high-water {
   color: blue;
   transform: translateY(-1rem);
