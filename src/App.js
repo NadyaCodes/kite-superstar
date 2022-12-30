@@ -1,19 +1,21 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Kite from "./Kite";
 import Water from "./Water";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(40, 5, 0);
+  const startingArray = makeWaveArray(5, 5, 0);
 
   const [gameState, setGameState] = useState({
     kite: 1,
     water: [...startingArray],
     location: 0,
     playing: false,
+    end: false,
   });
+
+  //SPLIT GAMESTATE INTO MULTIPLE FUNCTIONS?
 
   const handleUserKeyPress = (e) => {
     let num = gameState.kite;
@@ -24,6 +26,14 @@ function App() {
 
     if (e.key === "ArrowDown") {
       num--;
+    }
+
+    if (e.key === " ") {
+      num += 10;
+      setTimeout(() => {
+        num -= 10;
+        setGameState({ ...gameState, kite: num });
+      }, 700);
     }
     setGameState({ ...gameState, kite: num });
   };
@@ -51,9 +61,76 @@ function App() {
       : setGameState({ ...gameState, playing: false });
   };
 
-  useEffect(() => {
-    console.log(gameState.playing);
-  }, [gameState.playing]);
+  //maybe separate out the states so I don't need to put gamestate in the dependancy array?
+
+  const progressGame = useCallback(() => {
+    setGameState({ ...gameState, playing: false });
+    console.log("still playing");
+    let newWater = [...gameState.water];
+    let newLocation = gameState.location;
+    newWater.shift();
+    newLocation++;
+    if (gameState.kite <= gameState.water[0]) {
+      setGameState({ ...gameState, end: true });
+    }
+    if (gameState.location >= startingArray.length - 1) {
+      setGameState({ ...gameState, end: true });
+    }
+    setGameState((prev) => ({
+      ...prev,
+      location: newLocation,
+      water: [...newWater],
+    }));
+    setTimeout(() => {
+      setGameState({ ...gameState, playing: true });
+    }, 1000);
+  }, [gameState.playing, gameState.location, startingArray.length]);
+
+  // useEffect(() => {
+  //   console.log("inside useEffect");
+
+  //   // if (gameState.playing === true) {
+
+  //   // let count = gameState.water.length;
+  //   // // setInterval(() => {
+  //   // //   count--;
+  //   // //   if (count <= 0) {
+  //   // //     // clearInterval(interval);
+  //   // //     setGameState({ ...gameState, end: true });
+  //   // //   }
+  //   // //   progressGame(gameState, setGameState);
+  //   // // }, 1000);
+  //   // // console.log("playing");
+  //   // // let count = gameState.water.length;
+  //   // const interval = setInterval(() => {
+  //   //   count--;
+  //   //   if (count <= 0) {
+  //   //     clearInterval(interval);
+  //   //   }
+  //   //   // setInterval(progressGame, 1000);
+  //   //   progressGame(gameState, setGameState);
+  //   // }, 1000);
+  //   // // console.log("gameState", gameState);
+  //   // // return () => clearInterval(interval);
+  //   // // while (gameState.water.length > 1) {
+  //   // //   setInterval(progressGame, 1000);
+  //   // //   setGameState((prev) => ({...prev, count: count++}))
+  //   // // }
+  //   // //       var myTimer = setInterval(...);
+  //   // // clearInterval(myTimer);
+  //   // // while (gameState.water.length > 1) {
+  //   // //   setTimeout(() => {
+  //   // //     gameState.water.shift();
+  //   // //   }, 1000);
+  //   // // }
+  //   progressGame();
+
+  //   // console.log(gameState);
+
+  //   // } else {
+  //   //   console.log("not playing");
+  //   // }
+  // }, [progressGame]);
 
   // useEffect(() => {
   //   if (gameState.playing === true) {
@@ -98,6 +175,7 @@ function App() {
 
   return (
     <div className="App">
+      {gameState.end === true && <h2>GAME OVER</h2>}
       <button onClick={() => runGame()}>
         {gameState.playing === false ? "GO" : "Stop"}
       </button>
