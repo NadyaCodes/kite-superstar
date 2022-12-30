@@ -6,20 +6,17 @@ import { useState, useEffect } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(20, 5, 0);
+  const startingArray = makeWaveArray(40, 5, 0);
 
-  useEffect(() => {
-    console.log(startingArray);
-  }, []);
-
-  const [heights, setHeights] = useState({
+  const [gameState, setGameState] = useState({
     kite: 1,
     water: [...startingArray],
     location: 0,
+    playing: false,
   });
 
   const handleUserKeyPress = (e) => {
-    let num = heights.kite;
+    let num = gameState.kite;
 
     if (e.key === "ArrowUp") {
       num++;
@@ -28,7 +25,7 @@ function App() {
     if (e.key === "ArrowDown") {
       num--;
     }
-    setHeights({ ...heights, kite: num });
+    setGameState({ ...gameState, kite: num });
   };
 
   useEffect(() => {
@@ -40,13 +37,53 @@ function App() {
   });
 
   useEffect(() => {
-    for (let i = 1; i < heights.water.length; i++) {
+    for (let i = 1; i < gameState.water.length; i++) {
       setTimeout(() => {
-        const newLoc = (heights.location += 1);
-        setHeights((prev) => ({ ...prev, location: newLoc }));
+        const newLoc = (gameState.location += 1);
+        setGameState((prev) => ({ ...prev, location: newLoc }));
       }, 1000 * i);
     }
-  }, [heights]);
+  }, [gameState]);
+
+  const runGame = () => {
+    gameState.playing === false
+      ? setGameState({ ...gameState, playing: true })
+      : setGameState({ ...gameState, playing: false });
+  };
+
+  useEffect(() => {
+    console.log(gameState.playing);
+  }, [gameState.playing]);
+
+  // useEffect(() => {
+  //   if (gameState.playing === true) {
+  //     // console.log("gameState.water", gameState.water);
+  //     // console.log(gameState);
+  //     let newWave = gameState.water.shift();
+  //     console.log(gameState);
+  //     setGameState((prev) => ({ ...prev, water: newWave }));
+  //     console.log(gameState);
+  //     // console.log("gameState.water", gameState.water);
+  //     // while (gameState.wave.length >= 1) {
+  //     //   setTimeout(() => {
+  //     //     let newWave = gameState.wave.slice(0, 1);
+  //     //     setGameState({ ...gameState, wave: newWave });
+  //     //   }, 1000);
+  //     // }
+  //   }
+  //   // console.log(gameState);
+  //   // return gameState;
+  // }, [gameState]);
+
+  // useEffect(() => {
+  //   while (gameState.water.length !== 0) {
+  //     setTimeout(() => {
+  //       let newWaveArray = [...gameState.water];
+  //       newWaveArray.splice(0, 1);
+  //       setGameState({ ...gameState, wave: newWaveArray });
+  //     }, 1000);
+  //   }
+  // }, [gameState]);
 
   // useEffect(() => {
   //   // if (heights.water[heights.location] > heights.kite) {
@@ -61,8 +98,11 @@ function App() {
 
   return (
     <div className="App">
-      <Kite height={heights.kite} />
-      <Water heights={heights.water} />
+      <button onClick={() => runGame()}>
+        {gameState.playing === false ? "GO" : "Stop"}
+      </button>
+      <Kite height={gameState.kite} />
+      <Water heights={gameState.water} />
     </div>
   );
 }
