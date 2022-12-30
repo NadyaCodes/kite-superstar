@@ -6,17 +6,18 @@
 .water {
   display: flex;
   flex-direction: row;
-  animation: move 15s linear
+  width: fit-content;
+  /* animation: move 15s linear; */
 }
 
-@keyframes move {
+/* @keyframes move {
   0% {
     transform: translateX(0);
   }
   100% {
     transform: translateX(-100vw);
   }
-}
+} */
 
 .dot {
   width: 10px;

@@ -6,11 +6,15 @@ import { useState, useEffect } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(10, 5, 0);
+  const startingArray = makeWaveArray(20, 5, 0);
+
+  useEffect(() => {
+    console.log(startingArray);
+  }, []);
 
   const [heights, setHeights] = useState({
     kite: 1,
-    water: [0, ...startingArray],
+    water: [...startingArray],
     location: 0,
   });
 
@@ -44,17 +48,16 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    // if (heights.water[heights.location] > heights.kite) {
-    //   alert("You lose");
-    // }
-
-    //if you're too high, you should also lose
-    if (heights.water[heights.location] + 3 === heights.kite) {
-      let num = heights.kite - 1;
-      setHeights({ ...heights, kite: num });
-    }
-  }, [heights]);
+  // useEffect(() => {
+  //   // if (heights.water[heights.location] > heights.kite) {
+  //   //   alert("You lose");
+  //   // }
+  //   //if you're too high, you should also lose
+  //   // if (heights.water[heights.location] + 3 === heights.kite) {
+  //   //   let num = heights.kite - 1;
+  //   //   setHeights({ ...heights, kite: num });
+  //   // }
+  // }, [heights]);
 
   return (
     <div className="App">
