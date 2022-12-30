@@ -46,7 +46,7 @@ function App() {
         setHeights((prev) => ({ ...prev, location: newLoc }));
       }, 1000 * i);
     }
-  }, []);
+  }, [heights]);
 
   // useEffect(() => {
   //   // if (heights.water[heights.location] > heights.kite) {
