@@ -5,20 +5,24 @@ import { useState, useEffect, useCallback } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(5, 5, 0);
+  const startingArray = makeWaveArray(10, 5, 0);
 
-  const [gameState, setGameState] = useState({
-    kite: 1,
-    water: [...startingArray],
-    location: 0,
-    playing: false,
-    end: false,
-  });
+  // const [gameState, setGameState] = useState({
+  //   kite: 1,
+  //   water: [...startingArray],
+  //   location: 0,
+  //   playing: false,
+  //   end: false,
+  // });
 
-  //SPLIT GAMESTATE INTO MULTIPLE FUNCTIONS?
+  const [kite, setKite] = useState(1);
+  const [water, setWater] = useState([...startingArray]);
+  const [location, setLocation] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [end, setEnd] = useState(false);
 
-  const handleUserKeyPress = (e) => {
-    let num = gameState.kite;
+  const moveKite = (e) => {
+    let num = kite;
 
     if (e.key === "ArrowUp") {
       num++;
@@ -32,59 +36,57 @@ function App() {
       num += 10;
       setTimeout(() => {
         num -= 10;
-        setGameState({ ...gameState, kite: num });
+        setKite(num);
       }, 700);
     }
-    setGameState({ ...gameState, kite: num });
+    setKite(num);
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleUserKeyPress);
+    window.addEventListener("keydown", moveKite);
 
     return () => {
-      window.removeEventListener("keydown", handleUserKeyPress);
+      window.removeEventListener("keydown", moveKite);
     };
   });
 
-  useEffect(() => {
-    for (let i = 1; i < gameState.water.length; i++) {
-      setTimeout(() => {
-        const newLoc = (gameState.location += 1);
-        setGameState((prev) => ({ ...prev, location: newLoc }));
-      }, 1000 * i);
-    }
-  }, [gameState]);
+  // useEffect(() => {
+  //   for (let i = 1; i < water.length; i++) {
+  //     setTimeout(() => {
+  //       const newLoc = (location += 1);
+  //       setLocation(newLoc);
+  //     }, 1000 * i);
+  //   }
+  // }, [location]);
 
   const runGame = () => {
-    gameState.playing === false
-      ? setGameState({ ...gameState, playing: true })
-      : setGameState({ ...gameState, playing: false });
+    playing === false ? setPlaying(true) : setPlaying(false);
   };
 
   //maybe separate out the states so I don't need to put gamestate in the dependancy array?
 
-  const progressGame = useCallback(() => {
-    setGameState({ ...gameState, playing: false });
-    console.log("still playing");
-    let newWater = [...gameState.water];
-    let newLocation = gameState.location;
-    newWater.shift();
-    newLocation++;
-    if (gameState.kite <= gameState.water[0]) {
-      setGameState({ ...gameState, end: true });
-    }
-    if (gameState.location >= startingArray.length - 1) {
-      setGameState({ ...gameState, end: true });
-    }
-    setGameState((prev) => ({
-      ...prev,
-      location: newLocation,
-      water: [...newWater],
-    }));
-    setTimeout(() => {
-      setGameState({ ...gameState, playing: true });
-    }, 1000);
-  }, [gameState.playing, gameState.location, startingArray.length]);
+  // const progressGame = useCallback(() => {
+  //   setGameState({ ...gameState, playing: false });
+  //   console.log("still playing");
+  //   let newWater = [...gameState.water];
+  //   let newLocation = gameState.location;
+  //   newWater.shift();
+  //   newLocation++;
+  //   if (gameState.kite <= gameState.water[0]) {
+  //     setGameState({ ...gameState, end: true });
+  //   }
+  //   if (gameState.location >= startingArray.length - 1) {
+  //     setGameState({ ...gameState, end: true });
+  //   }
+  //   setGameState((prev) => ({
+  //     ...prev,
+  //     location: newLocation,
+  //     water: [...newWater],
+  //   }));
+  //   setTimeout(() => {
+  //     setGameState({ ...gameState, playing: true });
+  //   }, 1000);
+  // }, [gameState.playing, gameState.location, startingArray.length]);
 
   // useEffect(() => {
   //   console.log("inside useEffect");
@@ -175,12 +177,12 @@ function App() {
 
   return (
     <div className="App">
-      {gameState.end === true && <h2>GAME OVER</h2>}
+      {end === true && <h2>GAME OVER</h2>}
       <button onClick={() => runGame()}>
-        {gameState.playing === false ? "GO" : "Stop"}
+        {playing === false ? "GO" : "Stop"}
       </button>
-      <Kite height={gameState.kite} />
-      <Water heights={gameState.water} />
+      <Kite height={kite} />
+      <Water heights={water} />
     </div>
   );
 }
