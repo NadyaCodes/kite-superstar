@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(10, 5, 0);
+  const startingArray = makeWaveArray(20, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,
@@ -50,130 +50,27 @@ function App() {
     };
   });
 
-  // useEffect(() => {
-  //   for (let i = 1; i < water.length; i++) {
-  //     setTimeout(() => {
-  //       const newLoc = (location += 1);
-  //       setLocation(newLoc);
-  //     }, 1000 * i);
-  //   }
-  // }, [location]);
-
   const runGame = () => {
     playing === false ? setPlaying(true) : setPlaying(false);
   };
 
-  //maybe separate out the states so I don't need to put gamestate in the dependancy array?
+  useEffect(() => {
+    if (playing === true) {
+      let currentWater = [...water];
 
-  // const progressGame = useCallback(() => {
-  //   setGameState({ ...gameState, playing: false });
-  //   console.log("still playing");
-  //   let newWater = [...gameState.water];
-  //   let newLocation = gameState.location;
-  //   newWater.shift();
-  //   newLocation++;
-  //   if (gameState.kite <= gameState.water[0]) {
-  //     setGameState({ ...gameState, end: true });
-  //   }
-  //   if (gameState.location >= startingArray.length - 1) {
-  //     setGameState({ ...gameState, end: true });
-  //   }
-  //   setGameState((prev) => ({
-  //     ...prev,
-  //     location: newLocation,
-  //     water: [...newWater],
-  //   }));
-  //   setTimeout(() => {
-  //     setGameState({ ...gameState, playing: true });
-  //   }, 1000);
-  // }, [gameState.playing, gameState.location, startingArray.length]);
+      const interval = setInterval(function () {
+        currentWater.shift();
+        setWater([...currentWater]);
 
-  // useEffect(() => {
-  //   console.log("inside useEffect");
-
-  //   // if (gameState.playing === true) {
-
-  //   // let count = gameState.water.length;
-  //   // // setInterval(() => {
-  //   // //   count--;
-  //   // //   if (count <= 0) {
-  //   // //     // clearInterval(interval);
-  //   // //     setGameState({ ...gameState, end: true });
-  //   // //   }
-  //   // //   progressGame(gameState, setGameState);
-  //   // // }, 1000);
-  //   // // console.log("playing");
-  //   // // let count = gameState.water.length;
-  //   // const interval = setInterval(() => {
-  //   //   count--;
-  //   //   if (count <= 0) {
-  //   //     clearInterval(interval);
-  //   //   }
-  //   //   // setInterval(progressGame, 1000);
-  //   //   progressGame(gameState, setGameState);
-  //   // }, 1000);
-  //   // // console.log("gameState", gameState);
-  //   // // return () => clearInterval(interval);
-  //   // // while (gameState.water.length > 1) {
-  //   // //   setInterval(progressGame, 1000);
-  //   // //   setGameState((prev) => ({...prev, count: count++}))
-  //   // // }
-  //   // //       var myTimer = setInterval(...);
-  //   // // clearInterval(myTimer);
-  //   // // while (gameState.water.length > 1) {
-  //   // //   setTimeout(() => {
-  //   // //     gameState.water.shift();
-  //   // //   }, 1000);
-  //   // // }
-  //   progressGame();
-
-  //   // console.log(gameState);
-
-  //   // } else {
-  //   //   console.log("not playing");
-  //   // }
-  // }, [progressGame]);
-
-  // useEffect(() => {
-  //   if (gameState.playing === true) {
-  //     // console.log("gameState.water", gameState.water);
-  //     // console.log(gameState);
-  //     let newWave = gameState.water.shift();
-  //     console.log(gameState);
-  //     setGameState((prev) => ({ ...prev, water: newWave }));
-  //     console.log(gameState);
-  //     // console.log("gameState.water", gameState.water);
-  //     // while (gameState.wave.length >= 1) {
-  //     //   setTimeout(() => {
-  //     //     let newWave = gameState.wave.slice(0, 1);
-  //     //     setGameState({ ...gameState, wave: newWave });
-  //     //   }, 1000);
-  //     // }
-  //   }
-  //   // console.log(gameState);
-  //   // return gameState;
-  // }, [gameState]);
-
-  // useEffect(() => {
-  //   while (gameState.water.length !== 0) {
-  //     setTimeout(() => {
-  //       let newWaveArray = [...gameState.water];
-  //       newWaveArray.splice(0, 1);
-  //       setGameState({ ...gameState, wave: newWaveArray });
-  //     }, 1000);
-  //   }
-  // }, [gameState]);
-
-  // useEffect(() => {
-  //   // if (heights.water[heights.location] > heights.kite) {
-  //   //   alert("You lose");
-  //   // }
-  //   //if you're too high, you should also lose
-  //   // if (heights.water[heights.location] + 3 === heights.kite) {
-  //   //   let num = heights.kite - 1;
-  //   //   setHeights({ ...heights, kite: num });
-  //   // }
-  // }, [heights]);
+        if (water.length <= 1) {
+          console.log("clear is fired");
+          window.clearInterval(interval);
+          setPlaying(false);
+        }
+        return;
+      }, 500);
+    }
+  }, [playing, water]);
 
   return (
     <div className="App">
