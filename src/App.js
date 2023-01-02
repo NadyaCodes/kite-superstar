@@ -1,11 +1,11 @@
 import "./App.css";
 import Kite from "./Kite";
 import Water from "./Water";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(5, 5, 0);
+  const startingArray = makeWaveArray(20, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,
@@ -19,7 +19,9 @@ function App() {
   const [water, setWater] = useState([...startingArray]);
   const [waterDisplay, setWaterDisplay] = useState([...water]);
   const [location, setLocation] = useState(0);
+
   const [playing, setPlaying] = useState(false);
+  const play = useRef(false);
   const [end, setEnd] = useState(false);
 
   const moveKite = (e) => {
@@ -53,44 +55,45 @@ function App() {
 
   const runGame = () => {
     playing === false ? setPlaying(true) : setPlaying(false);
+    play.current === false ? (play.current = true) : (play.current = false);
+    console.log("play.current", play.current);
   };
 
   const resetGame = () => {
-    setPlaying(false);
-    setWaterDisplay(makeWaveArray(5, 5, 0));
+    play.current = false;
+    setWater(makeWaveArray(20, 5, 0));
+    setWaterDisplay(water);
     setEnd(false);
   };
 
   useEffect(() => {
-    if (playing === true) {
-      // let currentWater = [...water];
-
+    if (play.current === true) {
       const interval = setInterval(function () {
-        if (playing === false) {
-          console.log("false is fired");
+        if (play.current === false) {
           window.clearInterval(interval);
           setPlaying(false);
+          play.current = false;
         }
 
         waterDisplay.shift();
         setWaterDisplay([...waterDisplay]);
 
         if (waterDisplay.length <= 1) {
-          console.log("clear is fired");
           window.clearInterval(interval);
           setPlaying(false);
+          play.current = false;
         }
 
         return;
       }, 500);
     }
-  }, [playing, water, waterDisplay]);
+  }, [water, waterDisplay, play, playing]);
 
   return (
     <div className="App">
       {end === true && <h2>GAME OVER</h2>}
       <button onClick={() => runGame()}>
-        {playing === false ? "GO" : "Stop"}
+        {play.current === false ? "GO" : "Stop"}
       </button>
       <button onClick={() => resetGame()}>Reset</button>
       <Kite height={kite} />
