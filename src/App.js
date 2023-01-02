@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(5, 5, 0);
+  const startingArray = makeWaveArray(10, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,
@@ -18,7 +18,6 @@ function App() {
   const [kite, setKite] = useState(1);
   const [water, setWater] = useState([...startingArray]);
   const [waterDisplay, setWaterDisplay] = useState([...water]);
-  const location = useRef(0);
 
   const [playing, setPlaying] = useState(false);
   const play = useRef(false);
@@ -60,10 +59,9 @@ function App() {
 
   const resetGame = () => {
     play.current = false;
-    setWater(makeWaveArray(5, 5, 0));
+    setWater(makeWaveArray(10, 5, 0));
     setWaterDisplay(water);
     setEnd(false);
-    location.current = 0;
   };
 
   useEffect(() => {
@@ -76,8 +74,7 @@ function App() {
         }
 
         waterDisplay.shift();
-        location.current = location.current + 1;
-        console.log(location.current);
+
         setWaterDisplay([...waterDisplay]);
 
         if (waterDisplay.length <= 1) {
@@ -85,11 +82,18 @@ function App() {
           setPlaying(false);
           play.current = false;
         }
-
-        return;
+        return () => clearInterval(interval);
       }, 500);
     }
-  }, [water, waterDisplay, play, playing, location]);
+  }, [water, waterDisplay, play, playing]);
+
+  useEffect(() => {
+    if (kite === waterDisplay[0]) {
+      alert("You Lose");
+      setPlaying(false);
+      play.current = false;
+    }
+  }, [kite, waterDisplay]);
 
   return (
     <div className="App">
@@ -100,11 +104,8 @@ function App() {
       <button onClick={() => resetGame()}>Reset</button>
       <Kite height={kite} />
       <Water heights={waterDisplay} />
-      {/* {water[loc]} */}
-      <p>Water location.current:{water[location.current]}</p>
-      {/* {loc} */}
+      <p>Kite: {kite}</p>
       <p>Water Display[0]: {waterDisplay[0]}</p>
-      <p>Location.current: {location.current}</p>
     </div>
   );
 }
