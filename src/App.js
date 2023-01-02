@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(20, 5, 0);
+  const startingArray = makeWaveArray(5, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,
@@ -18,7 +18,7 @@ function App() {
   const [kite, setKite] = useState(1);
   const [water, setWater] = useState([...startingArray]);
   const [waterDisplay, setWaterDisplay] = useState([...water]);
-  const [location, setLocation] = useState(0);
+  const location = useRef(0);
 
   const [playing, setPlaying] = useState(false);
   const play = useRef(false);
@@ -56,14 +56,14 @@ function App() {
   const runGame = () => {
     playing === false ? setPlaying(true) : setPlaying(false);
     play.current === false ? (play.current = true) : (play.current = false);
-    console.log("play.current", play.current);
   };
 
   const resetGame = () => {
     play.current = false;
-    setWater(makeWaveArray(20, 5, 0));
+    setWater(makeWaveArray(5, 5, 0));
     setWaterDisplay(water);
     setEnd(false);
+    location.current = 0;
   };
 
   useEffect(() => {
@@ -76,6 +76,8 @@ function App() {
         }
 
         waterDisplay.shift();
+        location.current = location.current + 1;
+        console.log(location.current);
         setWaterDisplay([...waterDisplay]);
 
         if (waterDisplay.length <= 1) {
@@ -87,7 +89,7 @@ function App() {
         return;
       }, 500);
     }
-  }, [water, waterDisplay, play, playing]);
+  }, [water, waterDisplay, play, playing, location]);
 
   return (
     <div className="App">
@@ -98,6 +100,11 @@ function App() {
       <button onClick={() => resetGame()}>Reset</button>
       <Kite height={kite} />
       <Water heights={waterDisplay} />
+      {/* {water[loc]} */}
+      <p>Water location.current:{water[location.current]}</p>
+      {/* {loc} */}
+      <p>Water Display[0]: {waterDisplay[0]}</p>
+      <p>Location.current: {location.current}</p>
     </div>
   );
 }
