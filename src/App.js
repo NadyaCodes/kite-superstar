@@ -90,6 +90,7 @@ function App() {
   useEffect(() => {
     if (kite === waterDisplay[0]) {
       alert("You Lose");
+      setEnd(true);
       setPlaying(false);
       play.current = false;
     }
