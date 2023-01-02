@@ -34,6 +34,10 @@ function App() {
       num--;
     }
 
+    if (num > waterDisplay[0] + 3) {
+      num = waterDisplay[0] + 3;
+    }
+
     if (e.key === " ") {
       num += 10;
       setTimeout(() => {
@@ -86,6 +90,14 @@ function App() {
       }, 500);
     }
   }, [water, waterDisplay, play, playing]);
+
+  //make a value called continue true/false that set timeout automatically resets
+
+  // useEffect(() => {
+  //   if (play.current === true) {
+
+  //   }
+  // })
 
   useEffect(() => {
     if (kite === waterDisplay[0]) {
