@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(20, 5, 0);
+  const startingArray = makeWaveArray(5, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,
@@ -17,6 +17,7 @@ function App() {
 
   const [kite, setKite] = useState(1);
   const [water, setWater] = useState([...startingArray]);
+  const [waterDisplay, setWaterDisplay] = useState([...water]);
   const [location, setLocation] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [end, setEnd] = useState(false);
@@ -54,23 +55,36 @@ function App() {
     playing === false ? setPlaying(true) : setPlaying(false);
   };
 
+  const resetGame = () => {
+    setPlaying(false);
+    setWaterDisplay(makeWaveArray(5, 5, 0));
+    setEnd(false);
+  };
+
   useEffect(() => {
     if (playing === true) {
-      let currentWater = [...water];
+      // let currentWater = [...water];
 
       const interval = setInterval(function () {
-        currentWater.shift();
-        setWater([...currentWater]);
+        if (playing === false) {
+          console.log("false is fired");
+          window.clearInterval(interval);
+          setPlaying(false);
+        }
 
-        if (water.length <= 1) {
+        waterDisplay.shift();
+        setWaterDisplay([...waterDisplay]);
+
+        if (waterDisplay.length <= 1) {
           console.log("clear is fired");
           window.clearInterval(interval);
           setPlaying(false);
         }
+
         return;
       }, 500);
     }
-  }, [playing, water]);
+  }, [playing, water, waterDisplay]);
 
   return (
     <div className="App">
@@ -78,8 +92,9 @@ function App() {
       <button onClick={() => runGame()}>
         {playing === false ? "GO" : "Stop"}
       </button>
+      <button onClick={() => resetGame()}>Reset</button>
       <Kite height={kite} />
-      <Water heights={water} />
+      <Water heights={waterDisplay} />
     </div>
   );
 }
