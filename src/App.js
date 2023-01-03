@@ -21,6 +21,7 @@ function App() {
 
   const [playing, setPlaying] = useState(false);
   const play = useRef(false);
+  const [advanceWave, setAdvancewave] = useState(true);
   const [end, setEnd] = useState(false);
 
   const moveKite = (e) => {
@@ -34,8 +35,8 @@ function App() {
       num--;
     }
 
-    if (num > waterDisplay[0] + 3) {
-      num = waterDisplay[0] + 3;
+    if (num > waterDisplay[0] + 2) {
+      num = waterDisplay[0] + 2;
     }
 
     if (e.key === " ") {
@@ -66,42 +67,29 @@ function App() {
     setWater(makeWaveArray(10, 5, 0));
     setWaterDisplay(water);
     setEnd(false);
+    setKite(1);
   };
 
   useEffect(() => {
     if (play.current === true) {
-      const interval = setInterval(function () {
-        if (play.current === false) {
-          window.clearInterval(interval);
-          setPlaying(false);
-          play.current = false;
-        }
-
+      if (advanceWave === true) {
+        setAdvancewave(false);
         waterDisplay.shift();
-
         setWaterDisplay([...waterDisplay]);
 
         if (waterDisplay.length <= 1) {
-          window.clearInterval(interval);
           setPlaying(false);
           play.current = false;
         }
-        return () => clearInterval(interval);
-      }, 500);
+        setTimeout(() => {
+          setAdvancewave(true);
+        }, 500);
+      }
     }
-  }, [water, waterDisplay, play, playing]);
-
-  //make a value called continue true/false that set timeout automatically resets
-
-  // useEffect(() => {
-  //   if (play.current === true) {
-
-  //   }
-  // })
+  }, [waterDisplay, play, advanceWave, water, playing]);
 
   useEffect(() => {
-    if (kite === waterDisplay[0]) {
-      alert("You Lose");
+    if (kite === waterDisplay[0] - 1) {
       setEnd(true);
       setPlaying(false);
       play.current = false;
