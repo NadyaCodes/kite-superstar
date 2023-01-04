@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(10, 5, 0);
+  const startingArray = makeWaveArray(50, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,

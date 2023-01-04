@@ -7,7 +7,7 @@ const fiftyFifty = () => {
 };
 
 export const makeWaveArray = (arrayLength, maxNum, startNum) => {
-  const array = [startNum];
+  const array = [startNum, startNum, startNum, startNum];
 
   for (let i = 0; i < arrayLength; i++) {
     let numDifference = Math.floor(Math.random() * 2) + 1;
