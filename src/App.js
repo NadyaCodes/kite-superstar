@@ -18,7 +18,7 @@ function App() {
   const [kite, setKite] = useState(1);
   const [water, setWater] = useState([...startingArray]);
   const [waterDisplay, setWaterDisplay] = useState([...water]);
-
+  const [jump, setJump] = useState(false);
   const [playing, setPlaying] = useState(false);
   const play = useRef(false);
   const [advanceWave, setAdvancewave] = useState(true);
@@ -40,10 +40,12 @@ function App() {
     }
 
     if (e.key === " ") {
+      setJump(true);
       num += 10;
       setTimeout(() => {
         num -= 10;
         setKite(num);
+        setJump(false);
       }, 700);
     }
     setKite(num);
@@ -89,12 +91,15 @@ function App() {
   }, [waterDisplay, play, advanceWave, water, playing]);
 
   useEffect(() => {
-    if (kite === waterDisplay[0] - 1) {
+    if (kite <= waterDisplay[0] - 1) {
       setEnd(true);
       setPlaying(false);
       play.current = false;
     }
-  }, [kite, waterDisplay]);
+    if (kite > waterDisplay[0] + 2 && jump !== true) {
+      setKite(waterDisplay[0] + 2);
+    }
+  }, [kite, waterDisplay, jump]);
 
   return (
     <div className="App">
