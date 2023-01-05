@@ -5,7 +5,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const startingArray = makeWaveArray(50, 5, 0);
+  const waveNum = 50;
+  const startingArray = makeWaveArray(waveNum, 5, 0);
 
   // const [gameState, setGameState] = useState({
   //   kite: 1,
@@ -66,8 +67,8 @@ function App() {
 
   const resetGame = () => {
     play.current = false;
-    setWater(makeWaveArray(10, 5, 0));
-    setWaterDisplay(water);
+    setWater(startingArray);
+    setWaterDisplay(makeWaveArray(waveNum, 5, 0));
     setEnd(false);
     setKite(1);
   };
