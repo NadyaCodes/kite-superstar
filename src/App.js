@@ -25,7 +25,15 @@ function App() {
   const [advanceWave, setAdvancewave] = useState(true);
   const [end, setEnd] = useState(false);
 
+  const runGame = () => {
+    playing === false ? setPlaying(true) : setPlaying(false);
+    play.current === false ? (play.current = true) : (play.current = false);
+  };
+
   const moveKite = (e) => {
+    if (end === true) {
+      return;
+    }
     let num = kite;
 
     if (e.key === "ArrowUp") {
@@ -42,12 +50,13 @@ function App() {
 
     if (e.key === " ") {
       setJump(true);
+      runGame();
       num += 10;
       setTimeout(() => {
-        num -= 10;
+        num -= 8;
         setKite(num);
         setJump(false);
-      }, 700);
+      }, 1000);
     }
     setKite(num);
   };
@@ -60,11 +69,6 @@ function App() {
     };
   });
 
-  const runGame = () => {
-    playing === false ? setPlaying(true) : setPlaying(false);
-    play.current === false ? (play.current = true) : (play.current = false);
-  };
-
   const resetGame = () => {
     play.current = false;
     setWater(startingArray);
@@ -74,6 +78,9 @@ function App() {
   };
 
   useEffect(() => {
+    if (end === true) {
+      return;
+    }
     if (play.current === true) {
       if (advanceWave === true) {
         setAdvancewave(false);
