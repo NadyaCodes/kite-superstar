@@ -34,6 +34,13 @@ function App() {
     if (end === true) {
       return;
     }
+    if (playing === false) {
+      return;
+    }
+
+    if (play.current === false) {
+      return;
+    }
     let num = kite;
 
     if (e.key === "ArrowUp") {
