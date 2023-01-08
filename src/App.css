@@ -4,7 +4,7 @@
 }
 
 button {
-  margin-bottom: 5rem;
+  margin-bottom: 1rem;
 }
 
 .water {
@@ -29,6 +29,14 @@ button {
   margin: 10px;
   border-radius: 50%;
   background-color: blue;
+}
+
+.play-container {
+  transform: translateY(13rem);
+}
+
+.score {
+  border: 0;
 }
 
 /* .high-water {
