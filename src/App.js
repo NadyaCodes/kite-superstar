@@ -111,7 +111,7 @@ function App() {
         }, 500);
       }
     }
-  }, [waterDisplay, play, advanceWave, water, playing]);
+  }, [waterDisplay, play, advanceWave, water, playing, score]);
 
   useEffect(() => {
     if (kite <= waterDisplay[0] - 1) {
@@ -125,12 +125,14 @@ function App() {
     if (kite > waterDisplay[0] + 2 && jump !== true) {
       setKite(waterDisplay[0] + 2);
     }
-  }, [kite, waterDisplay, jump]);
+  }, [kite, waterDisplay, jump, highScore, score]);
 
   return (
     <div className="App">
       {end === true && <h2>GAME OVER</h2>}
-      {score >= highScore && <h2>New High Score: {score}</h2>}
+      {score >= highScore && score > 0 && playing === true && (
+        <h2 className="superstar">New High Score: {score}</h2>
+      )}
       <button onClick={() => runGame()}>
         {play.current === false ? "GO" : "Stop"}
       </button>
