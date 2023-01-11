@@ -58,15 +58,17 @@ function App() {
     }
 
     if (e.key === " ") {
-      setJump(true);
-      runGame();
-      num += 10;
-      newPoints += 10;
-      setTimeout(() => {
-        num -= 5;
-        setKite(num);
-        setJump(false);
-      }, 1000);
+      if (jump === false) {
+        setJump(true);
+        runGame();
+        num += 10;
+        newPoints += 10;
+        setTimeout(() => {
+          num -= 5;
+          setKite(num);
+          setJump(false);
+        }, 1000);
+      }
     }
     setKite(num);
     setScore(newPoints);
