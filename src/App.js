@@ -1,7 +1,7 @@
 import "./App.css";
 import Kite from "./Kite";
 import Water from "./Water";
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
@@ -57,10 +57,9 @@ function App() {
       newPoints++;
     }
 
-    if (e.key === " ") {
+    if (e.key === "Shift") {
       if (jump === false) {
         setJump(true);
-        runGame();
         num += 10;
         newPoints += 10;
         setTimeout(() => {
@@ -113,7 +112,7 @@ function App() {
         }, 500);
       }
     }
-  }, [waterDisplay, play, advanceWave, water, playing, score]);
+  }, [waterDisplay, play, advanceWave, water, playing, score, end]);
 
   useEffect(() => {
     if (kite <= waterDisplay[0] - 1) {
@@ -133,7 +132,9 @@ function App() {
     <div className="App">
       {end === true && <h2>GAME OVER</h2>}
       {score >= highScore && score > 0 && playing === true && (
-        <h2 className="superstar">New High Score: {score}</h2>
+        <h2>
+          New High Score: <section className="superstar">{score}</section>
+        </h2>
       )}
       <button onClick={() => runGame()}>
         {play.current === false ? "GO" : "Stop"}
