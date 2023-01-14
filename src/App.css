@@ -62,6 +62,7 @@ button {
   width: fit-content;
   z-index: 5;
   background-color: transparent;
+
 }
 
 .dude {
@@ -84,4 +85,40 @@ button {
   100% {
     transform: rotate(365deg)
   }
+}
+
+.colorBar {
+  background-color: azure;
+  width: fit-content;
+  padding: .3rem;
+  margin-bottom: 2rem;
+}
+
+.blue {
+  color: RGB(40, 80, 244)
+}
+
+.red {
+  color: RGB(253, 0, 11)
+}
+
+
+.orange {
+  color: RGB(181, 64, 0)
+}
+
+.purple {
+  color: RGB(140, 50, 241)
+}
+
+.pink {
+  color: RGB(233, 0, 172)
+}
+
+.green {
+  color: RGB(0, 134, 35)
+}
+
+.teal {
+  color: RGB(0, 125, 131)
 }

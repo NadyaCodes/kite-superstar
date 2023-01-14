@@ -1,6 +1,7 @@
 import "./App.css";
 import Kite from "./Kite";
 import Water from "./Water";
+import ColorBar from "./ColorBar";
 import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
@@ -27,6 +28,7 @@ function App() {
   const [lose, setLose] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
+  const [color, setColor] = useState("blue");
 
   const runGame = () => {
     playing === false ? setPlaying(true) : setPlaying(false);
@@ -134,6 +136,7 @@ function App() {
 
   return (
     <div className="App">
+      <ColorBar setColor={setColor} />
       {end === true &&
         (lose === false ? <h2>Winner! {score} points</h2> : <h2>GAME OVER</h2>)}
       {score >= highScore && score > 0 && playing === true && (
@@ -145,10 +148,11 @@ function App() {
         {play.current === false ? "GO" : "Stop"}
       </button>
       <button onClick={() => resetGame()}>Reset</button>
+
       <div className="score">Score: {score}</div>
       <div className="score">High Score: {highScore}</div>
       <div className="play-container">
-        <Kite height={kite} jump={jump} lose={lose} />
+        <Kite height={kite} jump={jump} lose={lose} color={color} />
         <Water heights={waterDisplay} />
       </div>
     </div>
