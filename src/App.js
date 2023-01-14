@@ -143,7 +143,7 @@ function App() {
       <div className="score">Score: {score}</div>
       <div className="score">High Score: {highScore}</div>
       <div className="play-container">
-        <Kite height={kite} />
+        <Kite height={kite} jump={jump} />
         <Water heights={waterDisplay} />
       </div>
     </div>

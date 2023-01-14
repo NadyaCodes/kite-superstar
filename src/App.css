@@ -55,6 +55,24 @@ button {
   border: 0;
 }
 
+
+#kite {
+  width: fit-content;
+}
+
+.dude {
+  width: 7rem;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(365deg)
+  }
+}
+
 /* .high-water {
   color: blue;
   transform: translateY(-1rem);
