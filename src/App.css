@@ -3,12 +3,16 @@
 }
 
 .App {
-  margin-top: 10rem;
+  margin-top: 1rem;
   margin-left: 10rem;
 }
 
 button {
   margin-bottom: 1rem;
+  background-color: transparent;
+  padding: .5rem;
+  margin: .5rem;
+  border-radius: .35rem;
 }
 
 .water {
