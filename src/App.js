@@ -24,6 +24,7 @@ function App() {
   const play = useRef(false);
   const [advanceWave, setAdvancewave] = useState(true);
   const [end, setEnd] = useState(false);
+  const [lose, setLose] = useState(false);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
 
@@ -84,6 +85,7 @@ function App() {
   const resetGame = () => {
     play.current = false;
     setWater(startingArray);
+    setLose(false);
     setWaterDisplay(makeWaveArray(waveNum, 5, 0));
     setEnd(false);
     setKite(1);
@@ -116,6 +118,7 @@ function App() {
 
   useEffect(() => {
     if (kite <= waterDisplay[0] - 1) {
+      setLose(true);
       setEnd(true);
       setPlaying(false);
       play.current = false;
@@ -143,7 +146,7 @@ function App() {
       <div className="score">Score: {score}</div>
       <div className="score">High Score: {highScore}</div>
       <div className="play-container">
-        <Kite height={kite} jump={jump} />
+        <Kite height={kite} jump={jump} lose={lose} />
         <Water heights={waterDisplay} />
       </div>
     </div>

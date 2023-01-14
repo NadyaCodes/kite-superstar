@@ -1,3 +1,7 @@
+* {
+  background-color: lightblue
+}
+
 .App {
   margin-top: 10rem;
   margin-left: 10rem;
@@ -64,6 +68,11 @@ button {
   width: 7rem;
 }
 
+.splash {
+  width: 10rem;
+  transform: translateX(-4rem);
+}
+
 @keyframes flip {
   0% {
     transform: rotate(0deg)
@@ -72,8 +81,3 @@ button {
     transform: rotate(365deg)
   }
 }
-
-/* .high-water {
-  color: blue;
-  transform: translateY(-1rem);
-} */
