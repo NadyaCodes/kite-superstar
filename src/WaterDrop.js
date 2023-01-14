@@ -1,4 +1,5 @@
 import React from "react";
+import wave from "./wave.png";
 
 export default function WaterDrop(props) {
   // if (props.height) {
@@ -11,7 +12,9 @@ export default function WaterDrop(props) {
   return (
     <div
       style={{ transform: `translateY(-${props.height}rem)` }}
-      className="dot"
-    ></div>
+      className="wave-container"
+    >
+      <img src={wave} alt="wave" className="wave" />
+    </div>
   );
 }

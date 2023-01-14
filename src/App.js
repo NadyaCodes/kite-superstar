@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const waveNum = 10;
+  const waveNum = 50;
   const startingArray = makeWaveArray(waveNum, 5, 0);
 
   // const [gameState, setGameState] = useState({
@@ -58,7 +58,7 @@ function App() {
       newPoints++;
     }
 
-    if (e.key === "Shift") {
+    if (e.key === "s") {
       if (jump === false) {
         setJump(true);
         num += 10;
@@ -112,7 +112,7 @@ function App() {
         }
         setTimeout(() => {
           setAdvancewave(true);
-        }, 500);
+        }, 300);
       }
     }
   }, [waterDisplay, play, advanceWave, water, playing, score, end]);

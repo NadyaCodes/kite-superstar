@@ -12,10 +12,11 @@ button {
 }
 
 .water {
+  position: relative;
   display: flex;
   flex-direction: row;
   width: fit-content;
-  /* animation: move 15s linear; */
+  z-index: 2;
 }
 
 .superstar {
@@ -34,25 +35,21 @@ button {
   }
 }
 
-/* @keyframes move {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100vw);
-  }
-} */
 
-.dot {
-  width: 10px;
-  height: 10px;
-  margin: 10px;
-  border-radius: 50%;
-  background-color: blue;
+.wave-container {
+  z-index: 2;
+  position: relative
+}
+
+.wave {
+  position: relative;
+  width: 10rem;
+  z-index: 2;
 }
 
 .play-container {
   transform: translateY(13rem);
+  position: relative;
 }
 
 .score {
@@ -61,11 +58,18 @@ button {
 
 
 #kite {
+  position: relative;
   width: fit-content;
+  z-index: 5;
+  background-color: transparent;
 }
 
 .dude {
   width: 7rem;
+  transform: translateY(3rem);
+  z-index: 15;
+  position: relative;
+  background-color: transparent;
 }
 
 .splash {

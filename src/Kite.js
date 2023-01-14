@@ -16,7 +16,7 @@ export default function Kite(props) {
   }, [props.jump, animate]);
 
   return (
-    <div id="kite" style={{ transform: `translateY(-${props.height - 1}rem)` }}>
+    <div id="kite" style={{ transform: `translateY(-${props.height}rem)` }}>
       {props.lose === true ? (
         <img
           src={splash}
