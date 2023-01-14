@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 
 function App() {
-  const waveNum = 50;
+  const waveNum = 10;
   const startingArray = makeWaveArray(waveNum, 5, 0);
 
   // const [gameState, setGameState] = useState({
@@ -108,6 +108,7 @@ function App() {
         if (waterDisplay.length <= 1) {
           setPlaying(false);
           play.current = false;
+          setEnd(true);
         }
         setTimeout(() => {
           setAdvancewave(true);
@@ -133,7 +134,8 @@ function App() {
 
   return (
     <div className="App">
-      {end === true && <h2>GAME OVER</h2>}
+      {end === true &&
+        (lose === false ? <h2>Winner! {score} points</h2> : <h2>GAME OVER</h2>)}
       {score >= highScore && score > 0 && playing === true && (
         <h2>
           New High Score: <section className="superstar">{score}</section>
