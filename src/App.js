@@ -50,17 +50,17 @@ function App() {
     }
     let num = kite;
 
-    if (e.key === "ArrowUp") {
+    if (e.key === "k") {
       num++;
       newPoints++;
     }
 
-    if (e.key === "ArrowDown") {
+    if (e.key === "m") {
       num--;
       newPoints++;
     }
 
-    if (e.key === "z") {
+    if (e.key === "j") {
       if (jump === false) {
         setJump(true);
         num += 10;
@@ -144,6 +144,7 @@ function App() {
           New High Score: <section className="superstar">{score}</section>
         </h2>
       )}
+      <div>Use k, m and j to navigate the waves</div>
       {end === false ? (
         <button onClick={() => runGame()}>Go</button>
       ) : (
