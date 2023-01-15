@@ -60,7 +60,7 @@ function App() {
       newPoints++;
     }
 
-    if (e.key === "s") {
+    if (e.key === "z") {
       if (jump === false) {
         setJump(true);
         num += 10;
@@ -144,10 +144,11 @@ function App() {
           New High Score: <section className="superstar">{score}</section>
         </h2>
       )}
-      <button onClick={() => runGame()}>
-        {play.current === false ? "GO" : "Stop"}
-      </button>
-      <button onClick={() => resetGame()}>Reset</button>
+      {end === false ? (
+        <button onClick={() => runGame()}>Go</button>
+      ) : (
+        <button onClick={() => resetGame()}>Reset</button>
+      )}
 
       <div className="score">Score: {score}</div>
       <div className="score">High Score: {highScore}</div>

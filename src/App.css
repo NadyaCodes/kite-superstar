@@ -9,10 +9,11 @@
 
 button {
   margin-bottom: 1rem;
-  background-color: transparent;
+  background-color: rgb(221, 240, 247);
   padding: .5rem;
   margin: .5rem;
   border-radius: .35rem;
+  border: 1px solid rgb(12, 87, 112)
 }
 
 .water {
@@ -92,10 +93,11 @@ button {
 }
 
 .colorBar {
-  background-color: azure;
+  background-color: rgb(12, 87, 112);
   width: fit-content;
-  padding: .3rem;
+  padding: .4rem;
   margin-bottom: 2rem;
+  border-radius: .25rem;
 }
 
 .blue {
