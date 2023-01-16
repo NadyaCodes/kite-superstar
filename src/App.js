@@ -4,6 +4,7 @@ import Water from "./Water";
 import ColorBar from "./ColorBar";
 import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
+import Directions from "./Directions";
 
 function App() {
   const waveNum = 50;
@@ -137,6 +138,7 @@ function App() {
   return (
     <div className="App">
       <ColorBar setColor={setColor} />
+      <Directions />
       {end === true &&
         (lose === false ? <h2>Winner! {score} points</h2> : <h2>GAME OVER</h2>)}
       {score >= highScore && score > 0 && playing === true && (
@@ -144,9 +146,9 @@ function App() {
           New High Score: <section className="superstar">{score}</section>
         </h2>
       )}
-      <div>Use k, m and j to navigate the waves</div>
+
       {end === false ? (
-        <button onClick={() => runGame()}>Go</button>
+        <button onClick={() => runGame()}>GO</button>
       ) : (
         <button onClick={() => resetGame()}>Reset</button>
       )}

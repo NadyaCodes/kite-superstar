@@ -138,3 +138,11 @@ button:hover {
   margin-top: 2rem;
   font-size: small;
 }
+
+
+.directions {
+  border: 1px solid rgb(12, 87, 112);
+  padding: 1rem;
+  width: fit-content;
+  display: flex;
+}
