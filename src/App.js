@@ -156,6 +156,11 @@ function App() {
       <div className="play-container">
         <Kite height={kite} jump={jump} lose={lose} color={color} />
         <Water heights={waterDisplay} />
+        <div className="vector-link">
+          <a href="https://www.vecteezy.com/free-vector/water">
+            Kitesurfing Vectors by Vecteezy
+          </a>
+        </div>
       </div>
     </div>
   );

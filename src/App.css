@@ -132,3 +132,9 @@ button:hover {
 .teal {
   color: RGB(0, 125, 131)
 }
+
+
+.vector-link {
+  margin-top: 2rem;
+  font-size: small;
+}
