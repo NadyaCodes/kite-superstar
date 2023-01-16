@@ -1,6 +1,8 @@
 import React from "react";
+import { useState } from "react";
 
-export default function colorBar(props) {
+export default function ColorBar(props) {
+  const [showBar, setShowBar] = useState(true);
   const colorArray = [
     "blue",
     "red",
@@ -15,5 +17,17 @@ export default function colorBar(props) {
       {color}
     </button>
   ));
-  return <div className="colorBar">{colorDisplay}</div>;
+
+  return (
+    <div className="colorBar">
+      {showBar === true ? (
+        <button onClick={() => setShowBar(false)}>Open</button>
+      ) : (
+        <span>
+          {colorDisplay}
+          <button onClick={() => setShowBar(true)}>Close</button>
+        </span>
+      )}
+    </div>
+  );
 }

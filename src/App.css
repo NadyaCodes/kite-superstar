@@ -16,6 +16,11 @@ button {
   border: 1px solid rgb(12, 87, 112)
 }
 
+button:hover {
+  background-color: rgb(12, 87, 112);
+  color: rgb(221, 240, 247);
+}
+
 .water {
   position: relative;
   display: flex;
@@ -93,7 +98,6 @@ button {
 }
 
 .colorBar {
-  background-color: rgb(12, 87, 112);
   width: fit-content;
   padding: .4rem;
   margin-bottom: 2rem;
