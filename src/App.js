@@ -148,9 +148,15 @@ function App() {
       )}
 
       {end === false ? (
-        <button onClick={() => runGame()}>GO</button>
+        playing === false && (
+          <button onClick={() => runGame()} className="big-button">
+            GO
+          </button>
+        )
       ) : (
-        <button onClick={() => resetGame()}>Reset</button>
+        <button onClick={() => resetGame()} className="big-button">
+          Reset
+        </button>
       )}
 
       <div className="score">Score: {score}</div>

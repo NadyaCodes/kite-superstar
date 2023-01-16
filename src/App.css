@@ -8,7 +8,6 @@
 }
 
 button {
-  margin-bottom: 1rem;
   background-color: rgb(221, 240, 247);
   padding: .5rem;
   margin: .5rem;
@@ -19,6 +18,10 @@ button {
 button:hover {
   background-color: rgb(12, 87, 112);
   color: rgb(221, 240, 247);
+}
+
+.big-button {
+  font-size: 3rem;
 }
 
 .water {
@@ -99,8 +102,6 @@ button:hover {
 
 .colorBar {
   width: fit-content;
-  padding: .4rem;
-  margin-bottom: 2rem;
   border-radius: .25rem;
 }
 
