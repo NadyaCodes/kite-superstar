@@ -69,7 +69,7 @@ function App() {
         num += 10;
         newPoints += 10;
         setTimeout(() => {
-          num -= 5;
+          num -= 4;
           setKite(num);
           setJump(false);
         }, 1000);
@@ -123,7 +123,7 @@ function App() {
   }, [waterDisplay, play, advanceWave, water, playing, score, end]);
 
   useEffect(() => {
-    if (kite <= waterDisplay[0] - 2) {
+    if (kite <= waterDisplay[0] - 1) {
       setLose(true);
       setEnd(true);
       setPlaying(false);
