@@ -5,6 +5,7 @@ import ColorBar from "./ColorBar";
 import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 import Directions from "./Directions";
+import GameOver from "./GameOver";
 
 function App() {
   const waveNum = 50;
@@ -140,7 +141,11 @@ function App() {
       <ColorBar setColor={setColor} />
       <Directions />
       {end === true &&
-        (lose === false ? <h2>Winner! {score} points</h2> : <h2>GAME OVER</h2>)}
+        (lose === false ? (
+          <h2>Winner! {score} points</h2>
+        ) : (
+          <GameOver resetGame={resetGame} />
+        ))}
       {score >= highScore && score > 0 && playing === true && (
         <h2>
           New High Score: <section className="superstar">{score}</section>
