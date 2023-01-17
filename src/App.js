@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { makeWaveArray } from "./helpers";
 import Directions from "./Directions";
 import GameOver from "./GameOver";
+import Winner from "./Winner";
 
 function App() {
   const waveNum = 50;
@@ -122,7 +123,7 @@ function App() {
   }, [waterDisplay, play, advanceWave, water, playing, score, end]);
 
   useEffect(() => {
-    if (kite <= waterDisplay[0] - 1) {
+    if (kite <= waterDisplay[0] - 2) {
       setLose(true);
       setEnd(true);
       setPlaying(false);
@@ -146,20 +147,20 @@ function App() {
 
       {end === true &&
         (lose === false ? (
-          <h2>Winner! {score} points</h2>
+          <Winner points={score} highScore={score >= highScore} />
         ) : (
           <GameOver resetGame={resetGame} />
         ))}
-      {score >= highScore && score > 0 && playing === true && (
-        <h2>
-          New High Score: <section className="superstar">{score}</section>
-        </h2>
-      )}
+
       <div className="playing-area">
         {end === false ? (
-          playing === false && (
+          play.current === false ? (
             <button onClick={() => runGame()} className="big-button">
               GO
+            </button>
+          ) : (
+            <button onClick={() => resetGame()} className="big-button">
+              Reset
             </button>
           )
         ) : (
@@ -168,7 +169,20 @@ function App() {
           </button>
         )}
 
-        <div className="score">Score: {score}</div>
+        {/* {score >= highScore && score > 0 && playing === true && (
+        <h2>
+          New High Score: <section className="superstar">{score}</section>
+        </h2>
+      )} */}
+        <div
+          className={
+            score >= highScore && score > 0 && playing === true
+              ? "score superstar"
+              : "score"
+          }
+        >
+          Score: {score}
+        </div>
         <div className="score">High Score: {highScore}</div>
         <div className="play-container">
           <Kite height={kite} jump={jump} lose={lose} color={color} />

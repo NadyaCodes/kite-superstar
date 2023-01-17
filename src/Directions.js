@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 
 export default function Directions() {
-  const [dir, setDir] = useState(false);
+  const [dir, setDir] = useState(true);
   return (
     <div>
       {dir === true ? (

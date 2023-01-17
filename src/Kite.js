@@ -45,7 +45,12 @@ export default function Kite(props) {
   }
 
   return (
-    <div id="kite" style={{ transform: `translateY(-${props.height}rem)` }}>
+    <div
+      id="kite"
+      style={{
+        transform: `translateY(-${props.height}rem)`,
+      }}
+    >
       {props.lose === true ? (
         <img
           src={splash}
