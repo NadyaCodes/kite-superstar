@@ -21,12 +21,12 @@ export default function ColorBar(props) {
   return (
     <div className="colorBar">
       {showBar === true ? (
-        <button onClick={() => setShowBar(false)}>Open Options</button>
+        <button onClick={() => setShowBar(false)}>Options</button>
       ) : (
-        <span>
+        <div className="colorDisplay">
+          <button onClick={() => setShowBar(true)}>Options</button>
           {colorDisplay}
-          <button onClick={() => setShowBar(true)}>X</button>
-        </span>
+        </div>
       )}
     </div>
   );

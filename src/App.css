@@ -2,6 +2,10 @@
   background-color: lightblue
 }
 
+h3 {
+  background-color: transparent;
+}
+
 .App {
   margin-top: 1rem;
   margin-left: 10rem;
@@ -22,6 +26,7 @@ button:hover {
 
 .big-button {
   font-size: 3rem;
+  margin-top: 4rem;
 }
 
 .water {
@@ -100,10 +105,7 @@ button:hover {
   }
 }
 
-.colorBar {
-  width: fit-content;
-  border-radius: .25rem;
-}
+
 
 .blue {
   color: RGB(40, 80, 244)
@@ -140,14 +142,32 @@ button:hover {
   font-size: small;
 }
 
+.directions-container {
+  /* background-color: rgb(12, 87, 112);
+  color: rgb(221, 240, 247); */
+}
+
 
 .directions {
-  border: 1px solid rgb(12, 87, 112);
+  background-color: rgb(12, 87, 112);
+  color: rgb(221, 240, 247);
+  border-radius: .25rem;
   padding: 1rem;
   width: fit-content;
   display: flex;
+  flex-direction: column;
 }
 
+.colorBar {
+  width: 6rem;
+}
+
+.colorDisplay {
+  width: fit-content;
+  border: 1px solid rgb(12, 87, 112);
+  display: flex;
+  flex-direction: column;
+}
 
 .game-over {
   position: absolute;
@@ -162,4 +182,12 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.menu {
+  display: flex;
+  position: absolute;
+  z-index: 3;
+  height: 3rem;
+  
 }

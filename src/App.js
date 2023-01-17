@@ -138,8 +138,12 @@ function App() {
 
   return (
     <div className="App">
-      <ColorBar setColor={setColor} />
-      <Directions />
+      <div className="menu">
+        {" "}
+        <ColorBar setColor={setColor} />
+        <Directions />
+      </div>
+
       {end === true &&
         (lose === false ? (
           <h2>Winner! {score} points</h2>
@@ -151,28 +155,29 @@ function App() {
           New High Score: <section className="superstar">{score}</section>
         </h2>
       )}
-
-      {end === false ? (
-        playing === false && (
-          <button onClick={() => runGame()} className="big-button">
-            GO
+      <div className="playing-area">
+        {end === false ? (
+          playing === false && (
+            <button onClick={() => runGame()} className="big-button">
+              GO
+            </button>
+          )
+        ) : (
+          <button onClick={() => resetGame()} className="big-button">
+            Reset
           </button>
-        )
-      ) : (
-        <button onClick={() => resetGame()} className="big-button">
-          Reset
-        </button>
-      )}
+        )}
 
-      <div className="score">Score: {score}</div>
-      <div className="score">High Score: {highScore}</div>
-      <div className="play-container">
-        <Kite height={kite} jump={jump} lose={lose} color={color} />
-        <Water heights={waterDisplay} />
-        <div className="vector-link">
-          <a href="https://www.vecteezy.com/free-vector/water">
-            Kitesurfing Vectors by Vecteezy
-          </a>
+        <div className="score">Score: {score}</div>
+        <div className="score">High Score: {highScore}</div>
+        <div className="play-container">
+          <Kite height={kite} jump={jump} lose={lose} color={color} />
+          <Water heights={waterDisplay} />
+          <div className="vector-link">
+            <a href="https://www.vecteezy.com/free-vector/water">
+              Kitesurfing Vectors by Vecteezy
+            </a>
+          </div>
         </div>
       </div>
     </div>

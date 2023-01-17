@@ -6,17 +6,13 @@ export default function Directions() {
   return (
     <div>
       {dir === true ? (
-        <button onClick={() => setDir(false)}>Read Directions</button>
+        <button onClick={() => setDir(false)}>Directions</button>
       ) : (
-        <div>
+        <div className="directions-container">
+          <button onClick={() => setDir(true)}>Directions</button>
           <div className="directions">
-            <div>
-              <p>Use k, m and j to navigate the waves </p>
-              <p>Press GO to start!</p>
-            </div>
-            <div>
-              <button onClick={() => setDir(true)}>X</button>
-            </div>
+            <h3>Use k, m and j to navigate the waves </h3>
+            <h3>Press GO to start!</h3>
           </div>
         </div>
       )}
