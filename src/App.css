@@ -14,12 +14,17 @@ h3 {
 button {
   background-color: rgb(221, 240, 247);
   padding: .5rem;
-  margin: .5rem;
+  margin-bottom: .5rem;
   border-radius: .35rem;
   border: 1px solid rgb(12, 87, 112)
 }
 
 button:hover {
+  background-color: rgb(12, 87, 112);
+  color: rgb(221, 240, 247);
+}
+
+.selected {
   background-color: rgb(12, 87, 112);
   color: rgb(221, 240, 247);
 }
@@ -114,29 +119,57 @@ button:hover {
   color: RGB(40, 80, 244)
 }
 
+.blue:hover {
+  background-color: RGB(40, 80, 244)
+}
+
 .red {
   color: RGB(253, 0, 11)
 }
 
+.red:hover {
+  background-color: RGB(253, 0, 11)
+}
+
 
 .orange {
-  color: RGB(181, 64, 0)
+  color: RGB(215, 42, 0)
+}
+
+.orange:hover {
+  background-color: RGB(215, 42, 0)
 }
 
 .purple {
   color: RGB(140, 50, 241)
 }
 
+.purple:hover {
+  background-color: RGB(140, 50, 241)
+}
+
 .pink {
   color: RGB(233, 0, 172)
+}
+
+.pink:hover {
+  background-color: RGB(233, 0, 172)
 }
 
 .green {
   color: RGB(0, 134, 35)
 }
 
+.green:hover {
+  background-color: RGB(0, 134, 35)
+}
+
 .teal {
   color: RGB(0, 125, 131)
+}
+
+.teal:hover {
+  background-color: RGB(0, 125, 131)
 }
 
 
@@ -146,8 +179,8 @@ button:hover {
 }
 
 .directions-container {
-  border-radius: .15rem;
-  border: 1px solid rgb(12, 87, 112);
+  /* border-radius: .25;
+  border: 1px solid rgb(12, 87, 112); */
 }
 
 
@@ -159,17 +192,30 @@ button:hover {
   width: fit-content;
   display: flex;
   flex-direction: column;
+  border-radius: .25rem;
+  border: 1px solid rgb(12, 87, 112);
 }
 
 .colorBar {
   width: 6rem;
+  
 }
 
 .colorDisplay {
   width: fit-content;
-  border: 1px solid rgb(12, 87, 112);
+
+  
+}
+
+.colorOptions {
   display: flex;
   flex-direction: column;
+  border-radius: .25rem;
+  border: 1px solid rgb(12, 87, 112);
+}
+
+.colorOptions > button {
+  margin: .5rem;
 }
 
 .game-over {

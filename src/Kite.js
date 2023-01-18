@@ -24,7 +24,7 @@ export default function Kite(props) {
       dudeColor = "hue-rotate(120deg)";
       break;
     case "orange":
-      dudeColor = "hue-rotate(160deg)";
+      dudeColor = "hue-rotate(145deg)";
       break;
     case "purple":
       dudeColor = "hue-rotate(30deg)";

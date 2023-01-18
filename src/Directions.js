@@ -9,7 +9,9 @@ export default function Directions() {
         <button onClick={() => setDir(false)}>Directions</button>
       ) : (
         <div className="directions-container">
-          <button onClick={() => setDir(true)}>Directions</button>
+          <button onClick={() => setDir(true)} className="selected">
+            Directions
+          </button>
           <div className="directions">
             <h3>Use k, m and j to navigate the waves </h3>
             <h3>Press GO to start!</h3>
